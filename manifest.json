@@ -29,6 +29,6 @@
    },
    "manifest_version": 3,
    "name": "bilibili视频下载助手 Fork修复版",
-   "permissions": [ "storage", "activeTab", "cookies", "downloads" ],
-   "version": "2.1.1"
+   "permissions": [ "storage", "activeTab", "downloads" ],
+   "version": "2.2.0"
 }

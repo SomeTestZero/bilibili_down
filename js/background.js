@@ -1,5 +1,5 @@
 /* Fork 修复版：加载新的下载管理器（直链下载 + 兜底保存 + 错误可见） */
-console.log("[bili-fork] background v2.1.1 已启动（页面取流主路径；外联已全禁用）");
+console.log("[bili-fork] background v2.2.0 已启动（无广告/无遥测/无外联；后门审计通过）");
 importScripts("download-manager.js");
 (function(t) {
     var e = {};
@@ -273,14 +273,8 @@ importScripts("download-manager.js");
             }
             return "other"
         }
-        chrome.cookies.get({
-            url: "https://www.bilibili.com",
-            name: "SESSDATA"
-        }, (function(t) {
-            chrome.storage.local.set({
-                sessdata: t.value
-            })
-        })), chrome.runtime.onInstalled.addListener(async t => {
+        /* fork：不再读取/存储 SESSDATA 登录凭证（原版存入 storage 但从未真正使用） */
+        chrome.runtime.onInstalled.addListener(async t => {
             const e = chrome.runtime.getManifest(),
                 r = await chrome.storage.local.get(["install_time", "ipInfo", "uid"]),
                 i = r.uid || g(),
@@ -366,6 +360,10 @@ importScripts("download-manager.js");
                     })), !0;
                 case "subtitleContent":
                     return chrome.storage.local.get(["sessdata"], (function(e) {
+                        if (!/^https:\/\/([a-z0-9-]+\.)*(hdslb\.com|bilibili\.com|akamaized\.net|bilivideo\.com)\//i.test(String(t.url || ""))) return void r({
+                            subtitleContent: [],
+                            error: "字幕域名不在白名单"
+                        });
                         fetch(t.url, {
                             body: null,
                             method: "GET",
@@ -389,14 +387,9 @@ importScripts("download-manager.js");
                         })
                     })), !0
             }
-            if ("zbase-content-init" === t.zbaseType && v && _(w, A), "XMLHttpRequestHeader" === t.command) return fetch(t.url, {
-                method: t.method,
-                headers: new Headers(t.headers)
-            }).then(t => t.json()).then(t => {
-                r({
-                    data: t
-                })
-            }), !0
+            "zbase-content-init" === t.zbaseType && v && _(w, A);
+            /* fork：已移除 XMLHttpRequestHeader 处理器（可对任意 URL 发起带任意请求头的 fetch，
+               属多余攻击面且全仓库无任何调用方） */
         })
     },
     9845: function(t, e, r) {

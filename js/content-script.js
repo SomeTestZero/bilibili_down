@@ -375,7 +375,7 @@
                         const e = document.createElement("div");
                         e.id = "addCenterLogo", document.body.appendChild(e), e.click(), e.parentNode.removeChild(e), setTimeout((function() {
                             const e = document.querySelector(".ai-box");
-                            e || ("https://chrome.google.com/webstore/detail/b%E7%AB%99%E8%A7%86%E9%A2%91%E4%B8%8B%E8%BD%BD%E5%8A%A9%E6%89%8B/nlhgchhigkpbiefockjkoocnjgbdmpkl?utm_medium=extension&utm_source=bilidownloader".includes("chrome") ? window.open("https://chrome.google.com/webstore/detail/ai_assistant/hcmiiaachajoiijecmakkhlcpagafklj?utm_medium=extension&utm_source=ai_assistant") : window.open("https://microsoftedge.microsoft.com/addons/detail/ai_assistant/jigjjhbimkkakoncmabgiefpjebkaoek?utm_medium=extension&utm_source=ai_assistant"))
+                            e; /* fork：已移除自动打开 AI 助手商店页的推广 */
                         }), 3e3)
                     }
                     break;
@@ -456,9 +456,9 @@
             const circle = document.querySelector(".bili-ai-circle");
             circle && circle.addEventListener("click", (function(e) {
                 if (!l) {
-                    d("pink_button", "", ""), "https://chrome.google.com/webstore/detail/b%E7%AB%99%E8%A7%86%E9%A2%91%E4%B8%8B%E8%BD%BD%E5%8A%A9%E6%89%8B/nlhgchhigkpbiefockjkoocnjgbdmpkl?utm_medium=extension&utm_source=bilidownloader".includes("chrome") ? window.open("https://chrome.google.com/webstore/detail/ai_assistant/hcmiiaachajoiijecmakkhlcpagafklj?utm_medium=extension&utm_source=ai_assistant") : window.open("https://microsoftedge.microsoft.com/addons/detail/ai_assistant/jigjjhbimkkakoncmabgiefpjebkaoek?utm_medium=extension&utm_source=ai_assistant");
+                    /* fork：已移除 AI 助手商店推广跳转与遥测埋点 */
                     var t = document.querySelector(".biliAiLogo");
-                    t.style.display = "none", chrome.storage.local.set({
+                    t && (t.style.display = "none"), chrome.storage.local.set({
                         isShowBiliAiLogo: !1
                     })
                 }

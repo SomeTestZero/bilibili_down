@@ -598,12 +598,8 @@
                                 const t = e.bili_down_num + 1;
                                 if (chrome.storage.local.set({
                                         bili_down_num: t
-                                    }), void 0 !== e.guid_gotry && !0 === e.guid_gotry) t >= 6 && !1 === e.review_show && (document.getElementById("review_show").style.display = "block", document.getElementsByClassName("container")[0].style.height = "260px", chrome.storage.local.set({
-                                    review_show: !0
-                                }));
-                                else if (t >= 6 && !1 === e.review_show) document.getElementById("review_show").style.display = "block", document.getElementsByClassName("container")[0].style.height = "260px", chrome.storage.local.set({
-                                    review_show: !0
-                                });
+                                    }), void 0 !== e.guid_gotry && !0 === e.guid_gotry) void 0; /* fork：已移除“五星好评”弹窗（原版下载 6 次后自动弹） */
+                                else if (t >= 6 && !1 === e.review_show) void 0; /* fork：已移除“五星好评”弹窗 */
                                 else if (t >= 3)
                                     if (void 0 === e.guid_saylater_num) I(), chrome.storage.local.set({
                                         guid_saylater_num: 0
@@ -653,15 +649,11 @@
             T = "https://microsoftedge.microsoft.com/addons/detail/tabtiby-%E6%96%B0%E6%A0%87%E7%AD%BE%E9%A1%B5-%E5%9F%BA%E4%BA%8E%E5%A4%8D%E5%88%B6%E7%A0%B4%E8%A7%A3%E7%9A%84%E4%B8%AA%E6%80%A7%E5%8C%96/bkddoibgfhkmaipcocldadjhhhomipha?utm_medium=extension&utm_source=allowcopy&hl=zh-CN";
 
         function L() {
-            B("click", "allowCopy", "yes"), chrome.storage.local.set({
-                guid_gotry: !0
-            });
-            const e = chrome.runtime.getManifest().homepage_url.includes("chrome");
-            window.open(!0 === e ? x : T)
+            return; /* fork：已移除 Tabtidy/AllowCopy 商店推广跳转 */
         }
 
         function I() {
-            B("click", "allowCopy", "show"), document.getElementById("guid_dialog").style.display = "block", document.getElementsByClassName("container")[0].style.width = "340px", document.getElementsByClassName("container")[0].style.height = "260px"
+            return; /* fork：已移除“试试热门插件”推广弹窗（原版下载 3 次后自动弹） */
         }
 
         function j(e) {
@@ -702,7 +694,7 @@
         }
 
         function q() {
-            "https://chrome.google.com/webstore/detail/b%E7%AB%99%E8%A7%86%E9%A2%91%E4%B8%8B%E8%BD%BD%E5%8A%A9%E6%89%8B/nlhgchhigkpbiefockjkoocnjgbdmpkl?utm_medium=extension&utm_source=bilidownloader".includes("chrome") ? window.open("https://chrome.google.com/webstore/detail/ai_assistant/hcmiiaachajoiijecmakkhlcpagafklj?utm_medium=extension&utm_source=ai_assistant") : window.open("https://microsoftedge.microsoft.com/addons/detail/ai_assistant/jigjjhbimkkakoncmabgiefpjebkaoek?utm_medium=extension&utm_source=ai_assistant")
+            return; /* fork：已移除 AI 助手商店推广跳转 */
         }
 
         function P() {

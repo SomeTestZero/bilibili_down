@@ -40,7 +40,26 @@
 | 接口无直链 | 静默转圈"加载中" | 明确提示（大会员/充电专属等） |
 | 遥测 | 上报 uuid/IP/事件到第三方 | 已禁用 |
 
+## 后门/安全审计结论（v2.2.0）
+
+| 检查项 | 结论 |
+|---|---|
+| 动态代码执行（eval / 远程脚本 / document.write） | ✅ 干净（仅 webpack 标准全局检测 `new Function(\"return this\")`） |
+| 外部消息接口 onMessageExternal | ✅ 无真实监听，外部网站无法控制扩展 |
+| 数据外发 | ✅ 原版的阿里云日志遥测 / ipinfo IP 采集 / twiclips 远程配置已在 fork 中全部禁用 |
+| SESSDATA 登录凭证 | ✅ 原版读出后明文存 storage 但从未使用；fork 已移除并去掉 cookies 权限 |
+| fetch 代理接口 | ✅ 原版 `XMLHttpRequestHeader`（任意 URL+任意请求头）已删除；字幕拉取加域名白名单 |
+| 内容脚本 / 抓包脚本 | ✅ 干净（仅抓 cid/aid，无外发） |
+| 广告 | ✅ 原版内置交叉推广（下载 3 次弹“插件推荐”、6 次弹“五星好评”、自动开商店页）已全部移除 |
+
 ## 更新记录
+
+### v2.2.0（去广告 + 安全加固）
+- 移除原版内置广告：**“试试热门插件”推广弹窗**（下载 3 次后自动弹，即用户看到的广告）、
+  **“五星好评”弹窗**（下载 6 次后）、AI 助手/AllowCopy/Tabtidy 商店跳转、页面 AI 圆钮推广
+- 安全加固：删除 `XMLHttpRequestHeader` 任意 URL fetch 代理（SSRF 攻击面）；
+  字幕拉取增加域名白名单（仅 hdslb/bilibili/akamaized/bilivideo）；
+  移除 SESSDATA 读取与存储，去掉 `cookies` 权限
 
 ### v2.1.1（修复三处控制台报错）
 - 修复 popup.js 对不存在的 `#toAIExtension` 元素取 `addEventListener`/`.style` 的报错
