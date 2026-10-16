@@ -1,0 +1,34 @@
+{
+   "action": {
+      "default_icon": {
+         "128": "/icons/bilibili_active2_128.png"
+      },
+      "default_popup": "popup.html"
+   },
+   "background": {
+      "service_worker": "js/background.js"
+   },
+   "content_scripts": [ {
+      "all_frames": false,
+      "js": [ "/js/fix-script.js" ],
+      "matches": [ "http://*.bilibili.com/*", "https://*.bilibili.com/*" ],
+      "run_at": "document_start"
+   }, {
+      "all_frames": false,
+      "css": [ "/css/content-script.css" ],
+      "js": [ "/js/content-script.js" ],
+      "matches": [ "http://*.bilibili.com/*", "https://*.bilibili.com/*" ],
+      "run_at": "document_idle"
+   } ],
+   "default_locale": "zh_CN",
+   "description": "【Fork 修复版】基于 bilibili哔哩哔哩视频下载助手 v1.0.18 修复：直链下载不占内存，大视频不再卡100%；错误可见可排查；已移除全部外联请求。",
+   "homepage_url": "https://chrome.google.com/webstore/detail/b%E7%AB%99%E8%A7%86%E9%A2%91%E4%B8%8B%E8%BD%BD%E5%8A%A9%E6%89%8B/nlhgchhigkpbiefockjkoocnjgbdmpkl",
+   "host_permissions": [ "http://*.bilibili.com/*", "https://*.bilibili.com/*" ],
+   "icons": {
+      "128": "/icons/bilibili_active2_128.png"
+   },
+   "manifest_version": 3,
+   "name": "bilibili视频下载助手 Fork修复版",
+   "permissions": [ "storage", "activeTab", "cookies", "downloads" ],
+   "version": "2.1.1"
+}
